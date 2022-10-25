@@ -1,0 +1,2 @@
+loguru==0.6.0
+aptos-sdk==0.4.1
