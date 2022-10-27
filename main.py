@@ -1,6 +1,7 @@
 from multiprocessing.dummy import Pool
 from os import getenv
 from sys import stderr
+from time import sleep
 
 from aptos_sdk.account import Account
 from aptos_sdk.client import RestClient
@@ -87,6 +88,10 @@ class App:
                         logger.error(f'{wallet} | Маленький баланс')
 
                     return
+
+                elif 'SEQUENCE_NUMBER_TOO_OLD' or '"Transaction already in mempool with a different payload"' in str(error):
+                    sleep(1)
+                    continue
 
                 elif '{"message":"' in str(error):
                     return
